@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 public class Letters {
+    
+    // PRINTER
     public static void printLetters(String templatefilename, List<Map<String, String>> CustomerList) {
         List<String> template = Customer.readFile(templatefilename);
         
@@ -22,11 +24,12 @@ public class Letters {
         }
     }
 
+    // REPLACE <<VALUES>>
     public static String fillIn(String data, Map<String, String> customer) {
         String completed = "";
         String line = data;
 
-        // get replacement
+        // GET CUSTOMER VALUE
         int start = line.indexOf("<<");
         int end = line.indexOf(">>");
         String toBeReplaced = line.substring(start, end)
@@ -34,12 +37,12 @@ public class Letters {
                 .replace(">>", "");
         String replacement = customer.get(toBeReplaced).replace("\\n", "\n");
 
-        // build string
+        // BUILD OUTPUT STRING
         completed += line.substring(0,start);
         completed += replacement;
         completed += line.substring(end+2);
 
-        // recursion?
+        // RECURSION, IF MORE <<VALUES>> FOUND
         if (completed.contains("<<")) {
             completed = fillIn(completed, customer);
         }

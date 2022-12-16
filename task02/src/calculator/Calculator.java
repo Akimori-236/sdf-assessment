@@ -6,7 +6,7 @@ public class Calculator {
     public static void startShell() {
         Double last = 0.0d;
         Console cons = System.console();
-
+        
         while (true) {
             String userInput = cons.readLine("> ");
             // EXIT
@@ -49,9 +49,6 @@ public class Calculator {
                 }
             } catch (NumberFormatException e) {
                 System.err.println("ERROR> Invalid numbers/usage\nUsage>>> 1 + 1");
-                // CLEAR SCREEN
-                // System.out.print("\033[H\033[2J");
-                // System.out.flush();
             }
         }
     }
