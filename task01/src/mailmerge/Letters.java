@@ -1,12 +1,13 @@
 package mailmerge;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 public class Letters {
     
     // PRINTER
-    public static void printLetters(String templatefilename, List<Map<String, String>> CustomerList) {
+    public static void printLetters(String templatefilename, List<Map<String, String>> CustomerList) throws IOException {
         List<String> template = Customer.readFile(templatefilename);
         
         for (Map<String, String> customer : CustomerList) {

@@ -1,7 +1,6 @@
 package mailmerge;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,33 +12,26 @@ import java.util.Map;
 public class Customer {
 
     // FILE INTAKE
-    public static ArrayList<String> readFile(String filename) {
+    public static ArrayList<String> readFile(String filename) throws IOException {
         ArrayList<String> lines = new ArrayList<>();
 
-        try {
-            FileReader fr = new FileReader(filename);
-            BufferedReader bfr = new BufferedReader(fr);
-            String line;
-            // collect every line
-            while (null != (line = bfr.readLine())) {
-                line = line.trim();
-                lines.add(line);
-                // System.out.println(line);
-            }
-            bfr.close();
-            fr.close();
-        } catch (FileNotFoundException e) {
-            System.err.println("ERROR> File not found");
-        } catch (IOException e) {
-            System.err.println("ERROR> Unable to read file");
-            // e.printStackTrace();
+        FileReader fr = new FileReader(filename);
+        BufferedReader bfr = new BufferedReader(fr);
+        String line;
+        // collect every line
+        while (null != (line = bfr.readLine())) {
+            line = line.trim();
+            lines.add(line);
+            // System.out.println(line);
         }
+        bfr.close();
+        fr.close();
 
         return lines;
     }
 
     // CSV FILE INTAKE
-    public static List<Map<String, String>> getAllCustomers(String csvfilename) {
+    public static List<Map<String, String>> getAllCustomers(String csvfilename) throws IOException {
         List<Map<String, String>> customerList = new ArrayList<>();
         List<String> dataList = readFile(csvfilename);
 
@@ -63,7 +55,7 @@ public class Customer {
         List<String> headerList = Arrays.asList(headers.split(","));
         List<String> dataList = Arrays.asList(datas.split(","));
 
-        for (int i=0; i<headerList.size(); i++) {
+        for (int i = 0; i < headerList.size(); i++) {
             customer.put(headerList.get(i).trim(), dataList.get(i).trim());
         }
         return customer;
