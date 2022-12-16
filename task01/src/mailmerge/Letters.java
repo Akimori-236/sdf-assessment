@@ -8,7 +8,7 @@ public class Letters {
         List<String> template = Customer.readFile(templatefilename);
         
         for (Map<String, String> customer : CustomerList) {
-            System.out.println("==================================================");
+            System.out.println("====================Letter Start====================");
             for (String line : template) {
                 if (!line.contains("<<")) {
                     System.out.println(line);
@@ -18,6 +18,7 @@ public class Letters {
                 }
 
             }
+            System.out.println("====================Letter End====================");
         }
     }
 
