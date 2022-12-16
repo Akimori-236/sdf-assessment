@@ -31,16 +31,18 @@ public class Letters {
         String toBeReplaced = line.substring(start, end)
                 .replace("<<", "")
                 .replace(">>", "");
-        String replacement = customer.get(toBeReplaced);
+        String replacement = customer.get(toBeReplaced).replace("\\n", "\n");
 
         // build string
         completed += line.substring(0,start);
         completed += replacement;
         completed += line.substring(end+2);
 
-        // new line not working
-        String separator = System.lineSeparator();
-        completed.replace("\\n", separator);
+        // recursion?
+        if (completed.contains("<<")) {
+            completed = fillIn(completed, customer);
+        }
+
         return completed;
     }
 }
