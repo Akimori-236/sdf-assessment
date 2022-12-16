@@ -22,7 +22,7 @@ public class Calculator {
             // GETTING PARAMETERS
             Double num1 = 0.0d;
             Double num2 = 0.0d;
-            String[] parameters = userInput.split(" ");
+            String[] parameters = userInput.split("\\s+");
             if (parameters.length != 3) {
                 System.err.println("ERROR> Invalid numbers/usage\nUsage>>> 1 + 1");
             } else {
